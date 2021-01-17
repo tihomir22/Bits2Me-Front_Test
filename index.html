@@ -37,13 +37,12 @@
   <script>
     const cryptosToQuery = ["bitcoin", "iota"];
     const socket = io("http://localhost:3000");
+
     socket.on("connect", function () {
-      console.log("Connected");
       socket.emit("prices", cryptosToQuery, (response) => {});
-      socket.emit("identity", 0, (response) => console.log("Identity:", response));
     });
+
     socket.on("pricesServer", function (data) {
-      console.log("event", data);
       let fatherElement = document.querySelector(".padreCryptos");
       data.forEach((crypto) => {
         let childElement = fatherElement.querySelector(`#${crypto.coinName.toLowerCase()}`);
